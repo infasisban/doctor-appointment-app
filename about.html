@@ -3,21 +3,58 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Doctor Appointment App - About</title>
+        <title>About - Doctor Appointment App</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
         />
+        <style>
+            body {
+                background: linear-gradient(to right, #e0f7fa, #e1f5fe);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .content-container {
+                background-color: white;
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                margin-top: 50px;
+            }
+            h2,
+            h4 {
+                color: #0288d1;
+            }
+            footer {
+                margin-top: auto;
+                background-color: #0288d1;
+                color: white;
+                padding: 15px 0;
+            }
+            ul li,
+            ol li {
+                margin-bottom: 10px;
+            }
+        </style>
     </head>
     <body>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html"
                     >Doctor Appointment App</a
                 >
-                <div>
-                    <ul class="navbar-nav">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
@@ -38,15 +75,57 @@
         </nav>
 
         <!-- About Content -->
-        <div class="container mt-5">
-            <h2>About Doctor Appointment App</h2>
+        <div class="container content-container">
+            <h2>About Doctor Appointment</h2>
             <p>
-                This web application allows patients to easily book appointments
-                with doctors. Doctors can view and manage appointments
-                efficiently. The app is built using HTML, Bootstrap, and later
-                integrated with JavaScript and a backend for full CRUD
-                operations.
+                A <strong>doctor appointment</strong> is a scheduled meeting
+                between a patient and a medical professional. It allows patients
+                to receive timely medical advice, diagnosis, and treatment
+                without long waiting periods. Appointments help organize the
+                doctor’s daily schedule efficiently, ensuring that every patient
+                receives proper attention.
             </p>
+
+            <h4>Importance of Doctor Appointments:</h4>
+            <ul>
+                <li>
+                    <strong>Timely Care:</strong> Ensures patients are seen on
+                    time and reduces overcrowding in hospitals.
+                </li>
+                <li>
+                    <strong>Efficient Scheduling:</strong> Helps doctors manage
+                    their consultations and procedures systematically.
+                </li>
+                <li>
+                    <strong>Patient Records:</strong> Allows proper
+                    documentation of patient history, treatments, and
+                    follow-ups.
+                </li>
+                <li>
+                    <strong>Prevention & Monitoring:</strong> Regular
+                    appointments help in preventive care and monitoring chronic
+                    conditions.
+                </li>
+            </ul>
+
+            <h4>Key Steps in Booking an Appointment:</h4>
+            <ol>
+                <li>Patient chooses a suitable date and time.</li>
+                <li>
+                    Patient provides personal information (name, contact, reason
+                    for visit).
+                </li>
+                <li>Appointment is confirmed by the doctor or clinic.</li>
+                <li>
+                    Patient attends the scheduled session for consultation or
+                    treatment.
+                </li>
+            </ol>
         </div>
+
+        <!-- Footer -->
+        <footer class="text-center">Developed by INFAS | 2025</footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
