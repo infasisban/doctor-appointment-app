@@ -23,8 +23,11 @@ if(isset($_POST['update'])){
 
     // Server-side validation
     if(empty($name)) $errors['name'] = "Name is required!";
+    elseif(strlen($name) < 3) $errors['name'] = "Name must be at least 3 characters!";
+
     if(empty($email)) $errors['email'] = "Email is required!";
     elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors['email'] = "Invalid email format!";
+
     if(empty($phone)) $errors['phone'] = "Phone is required!";
     elseif(!is_numeric($phone) || strlen($phone) != 10) $errors['phone'] = "Phone must be 10 digits!";
 
@@ -44,7 +47,6 @@ if(isset($_POST['update'])){
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Edit Appointment - Doctor Appointment App</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
@@ -83,7 +85,10 @@ body {
         <div class="mb-3">
             <label class="form-label">Name</label>
             <div class="input-group">
-                <input type="text" name="name" id="name" value="<?php echo $row['name']; ?>" class="form-control">
+                <input type="text" name="name" id="name" 
+                       value="<?php echo htmlspecialchars($row['name']); ?>" 
+                       class="form-control" 
+                       oninput="this.value=this.value.toUpperCase()">
                 <span class="input-group-text" id="nameIcon"></span>
             </div>
             <div class="text-danger" id="nameError"><?php echo $errors['name'] ?? ''; ?></div>
@@ -92,7 +97,9 @@ body {
         <div class="mb-3">
             <label class="form-label">Email</label>
             <div class="input-group">
-                <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>" class="form-control">
+                <input type="email" name="email" id="email" 
+                       value="<?php echo htmlspecialchars($row['email']); ?>" 
+                       class="form-control">
                 <span class="input-group-text" id="emailIcon"></span>
             </div>
             <div class="text-danger" id="emailError"><?php echo $errors['email'] ?? ''; ?></div>
@@ -101,7 +108,9 @@ body {
         <div class="mb-3">
             <label class="form-label">Phone</label>
             <div class="input-group">
-                <input type="text" name="phone" id="phone" value="<?php echo $row['phone']; ?>" class="form-control">
+                <input type="text" name="phone" id="phone" 
+                       value="<?php echo htmlspecialchars($row['phone']); ?>" 
+                       class="form-control">
                 <span class="input-group-text" id="phoneIcon"></span>
             </div>
             <div class="text-danger" id="phoneError"><?php echo $errors['phone'] ?? ''; ?></div>
@@ -115,7 +124,7 @@ body {
 </div>
 
 <script>
-// Live validation function
+// Live validation
 function validateField(field, iconId, errorId, type){
     const value = field.value.trim();
     let valid = false;
@@ -123,6 +132,8 @@ function validateField(field, iconId, errorId, type){
 
     if(value === ""){
         message = type + " is required!";
+    } else if(type === "Name" && value.length < 3){
+        message = "Name must be at least 3 characters!";
     } else if(type === "Email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){
         message = "Invalid email format!";
     } else if(type === "Phone" && (isNaN(value) || value.length !== 10)){
@@ -135,7 +146,6 @@ function validateField(field, iconId, errorId, type){
     document.getElementById(iconId).innerHTML = valid ? "✅" : (message ? "❌" : "");
 }
 
-// Add event listeners
 document.getElementById("name").addEventListener("input", function(){
     validateField(this, "nameIcon", "nameError", "Name");
 });
@@ -143,6 +153,7 @@ document.getElementById("email").addEventListener("input", function(){
     validateField(this, "emailIcon", "emailError", "Email");
 });
 document.getElementById("phone").addEventListener("input", function(){
+    this.value = this.value.replace(/[^0-9]/g,''); // numbers only
     validateField(this, "phoneIcon", "phoneError", "Phone");
 });
 </script>
